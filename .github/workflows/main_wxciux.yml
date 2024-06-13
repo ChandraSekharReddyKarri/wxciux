@@ -31,22 +31,6 @@ jobs:
           cd client
           npm install
           npm run build
-    
-      - name: Verify frontend build directory
-        run: |
-          ls client/public
-
-      - name: Create server/public directory
-        run: |
-          mkdir -p server/public
-
-      - name: Copy frontend build to server public directory
-        run: |
-          robocopy client/public server/public /MIR
-
-      - name: Print server/public directory structure for debugging
-        run: |
-          dir server/public /S
       
       - name: Upload artifact for deployment job
         uses: actions/upload-artifact@v3
