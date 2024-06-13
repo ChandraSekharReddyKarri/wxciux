@@ -35,6 +35,12 @@ jobs:
       - name: Copy frontend build to backend public directory
         run: |
           powershell -Command "Copy-Item -Path client/build/* -Destination server/public -Recurse -Force"
+        
+      - name: Upload artifact for deployment job
+        uses: actions/upload-artifact@v3
+        with:
+          name: node-app
+          path: .
 
 
   deploy:
