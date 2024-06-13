@@ -39,6 +39,11 @@ jobs:
             Write-Error "Build directory does not exist"
             exit 1
           }
+      - name: Print directory structure for debugging
+        shell: pwsh
+        run: |
+          Get-ChildItem -Recurse -Path client/build
+          Get-ChildItem -Recurse -Path server/public
 
       - name: Copy frontend build to backend public directory
         run: |
@@ -48,6 +53,11 @@ jobs:
             Write-Error "Robocopy encountered an error"
             exit 1 
           }
+    
+      - name: Print server/public directory structure for debugging
+        shell: pwsh
+        run: |
+          Get-ChildItem -Recurse -Path server/public
       
       - name: Upload artifact for deployment job
         uses: actions/upload-artifact@v3
