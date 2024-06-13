@@ -32,8 +32,9 @@ jobs:
           npm install
           npm run build
 
-      - name: Copy frontend build to backend
-        run: AzCopy client\build server\public /MIR
+      - name: Copy frontend build to backend public directory
+        run: |
+          azcopy copy "client/build/*" "server/public/" --recursive
 
   deploy:
     runs-on: ubuntu-latest
