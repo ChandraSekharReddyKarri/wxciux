@@ -33,7 +33,7 @@ jobs:
           npm run build
 
       - name: Copy frontend build to backend
-        run: robocopy client\build server\public /MIR || exit 0  # Suppress robocopy errors
+        run: robocopy client\build server\public /MIR
 
   deploy:
     runs-on: ubuntu-latest
