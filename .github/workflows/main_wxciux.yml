@@ -34,15 +34,15 @@ jobs:
     
       - name: Verify frontend build directory
         run: |
-          ls client/public
+          ls client/build
 
       - name: Create server/public directory
         run: |
           mkdir -p server/public
-          
+
       - name: Copy frontend build to server public directory
         run: |
-          robocopy client\public server\public /MIR || exit 0  # Suppress robocopy error
+          robocopy client/public server/public /MIR
 
       - name: Print server/public directory structure for debugging
         run: |
