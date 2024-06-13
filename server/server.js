@@ -12,7 +12,7 @@ app.use((req, res, next) => {
 });
 
 // Serve static files from the React app
-app.use(express.static(path.join(__dirname, '../client/public')));
+app.use(express.static(path.join(__dirname, '../client/build')));
 
 // API endpoint
 app.get('/api', (req, res) => {
@@ -21,7 +21,7 @@ app.get('/api', (req, res) => {
 
 // All other requests should return the React app
 app.get('*', (req, res) => {
-  res.sendFile(path.join(__dirname, '../client/public', 'index.html'));
+  res.sendFile(path.join(__dirname, '../client/build', 'index.html'));
 });
 
 // Error handling middleware
