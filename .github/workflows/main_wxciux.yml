@@ -33,11 +33,12 @@ jobs:
           npm run build
 
       - name: Verify frontend build directory exists
+        shell: pwsh
         run: |
-          if not exist client\public\index.html (
-            echo "Build directory does not exist"
+          if (-Not (Test-Path -Path "client/public/index.html")) {
+            Write-Error "Build directory does not exist"
             exit 1
-          )
+          }
 
       - name: Copy frontend build to backend public directory
         run: |
