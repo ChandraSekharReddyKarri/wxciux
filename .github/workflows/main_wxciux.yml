@@ -34,7 +34,7 @@ jobs:
     
       - name: Verify frontend build directory
         run: |
-          ls client/build
+          ls client/public
 
       - name: Create server/public directory
         run: |
