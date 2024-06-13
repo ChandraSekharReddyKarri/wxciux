@@ -32,10 +32,17 @@ jobs:
           npm install
           npm run build
 
+      - name: Verify frontend build directory exists
+        run: |
+          if not exist client\public\index.html (
+            echo "Build directory does not exist"
+            exit 1
+          )
+
       - name: Copy frontend build to backend public directory
         run: |
           mkdir -p server/public
-          robocopy client/build server/public /MIR
+          robocopy client/public server/public /MIR
       
       - name: Upload artifact for deployment job
         uses: actions/upload-artifact@v3
