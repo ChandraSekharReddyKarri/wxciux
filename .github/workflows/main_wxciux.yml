@@ -43,7 +43,11 @@ jobs:
       - name: Copy frontend build to backend public directory
         run: |
           mkdir -p server/public
-          robocopy client/public server/public /MIR || exit 0
+          robocopy client/public server/public /MIR
+          if ($LASTEXITCODE -ge 8) { 
+            Write-Error "Robocopy encountered an error"
+            exit 1 
+          }
       
       - name: Upload artifact for deployment job
         uses: actions/upload-artifact@v3
