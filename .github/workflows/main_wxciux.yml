@@ -32,12 +32,13 @@ jobs:
           npm install
           npm run build
 
+      - name: Create wwwroot directory if not exists
+        run: |
+          powershell -Command "if (-Not (Test-Path -Path site/wwwroot)) { New-Item -ItemType Directory -Force -Path site/wwwroot }"
+
       - name: Copy build to wwwroot
         run: |
-          powershell -Command "Copy-Item -Path client\build\* -Destination wwwroot -Recurse"
-
-      - name: List wwwroot directory contents
-        run: dir wwwroot
+          powershell -Command "Copy-Item -Path client\build\* -Destination site\wwwroot -Recurse"
 
       - name: Copy frontend build to backend public directory
         run: |
@@ -47,7 +48,7 @@ jobs:
         uses: actions/upload-artifact@v3
         with:
           name: node-app
-          path: wwwroot
+          path: site/wwwroot
 
 
   deploy:
@@ -74,5 +75,5 @@ jobs:
         with:
           app-name: 'wxciux'
           slot-name: 'Production'
-          package: wwwroot
+          package: site/wwwroot
           
