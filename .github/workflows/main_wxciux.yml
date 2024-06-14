@@ -34,11 +34,17 @@ jobs:
 
       - name: Create wwwroot directory if not exists
         run: |
-          powershell -Command "if (-Not (Test-Path -Path site/wwwroot)) { New-Item -ItemType Directory -Force -Path site/wwwroot }"
+          if (!(Test-Path -Path site/wwwroot)) {
+            New-Item -ItemType Directory -Force -Path site/wwwroot
+          }
 
       - name: Copy build to wwwroot
         run: |
           powershell -Command "Copy-Item -Path client\build\* -Destination site\wwwroot -Recurse"
+
+      - name: List wwwroot directory contents
+        run: |
+          Get-ChildItem -Path site/wwwroot -Recurse
 
       - name: Copy frontend build to backend public directory
         run: |
