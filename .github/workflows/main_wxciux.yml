@@ -34,8 +34,10 @@ jobs:
 
       - name: Copy build to wwwroot
         run: |
-          powershell -Command "New-Item -ItemType Directory -Force -Path wwwroot"
           powershell -Command "Copy-Item -Path client\build\* -Destination wwwroot -Recurse"
+
+      - name: List wwwroot directory contents
+        run: dir wwwroot
 
       - name: Copy frontend build to backend public directory
         run: |
@@ -45,7 +47,7 @@ jobs:
         uses: actions/upload-artifact@v3
         with:
           name: node-app
-          path: .
+          path: wwwroot
 
 
   deploy:
@@ -72,5 +74,5 @@ jobs:
         with:
           app-name: 'wxciux'
           slot-name: 'Production'
-          package: .
+          package: wwwroot
           
