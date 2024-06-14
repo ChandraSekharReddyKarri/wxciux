@@ -32,6 +32,11 @@ jobs:
           npm install
           npm run build
 
+      - name: Copy build to wwwroot
+        run: |
+          powershell -Command "New-Item -ItemType Directory -Force -Path wwwroot"
+          powershell -Command "Copy-Item -Path client\build\* -Destination wwwroot -Recurse"
+
       - name: Copy frontend build to backend public directory
         run: |
           powershell -Command "Copy-Item -Path client/build/* -Destination server/public -Recurse -Force"
