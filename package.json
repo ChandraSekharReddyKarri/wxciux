@@ -7,9 +7,9 @@
     "start": "concurrently \"npm run server\" \"npm run client\"",
     "server": "cd server && npm run dev",
     "client": "cd client && npm run start",
-    "build": "cd client && npm install && npm run build",
-    "postinstall": "npm run build",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "postinstall": "npm run build && robocopy client/build wwwroot /E",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "cd client && npm run build"
   },
   "engines": {
     "node": "14.x"
